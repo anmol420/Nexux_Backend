@@ -8,7 +8,15 @@ export const registerCandidate = async (req, res) => {
         const userExists = await Candidate.findOne({ email });
         if (userExists) return res.status(400).json({ message: "Candidate already exists" });
 
-        const candidate = await Candidate.create({ name, email, password, location, salary });
+        const candidate = await Candidate.create({
+            name,
+            email,
+            password,
+            location,
+            salary,
+            pdfUrl: req.file ? req.file.path : "",
+            pdfText: req.file ? "Sample Extracted Text" : "", 
+        });
 
         if (candidate) {
             res.status(201).json({
@@ -26,6 +34,7 @@ export const registerCandidate = async (req, res) => {
         res.status(500).json({ message: "Server error", error });
     }
 };
+
 
 export const loginCandidate = async (req, res) => {
     const { email, password } = req.body;
