@@ -9,7 +9,11 @@ connectDB();
 const app = express();
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send("API is running...");
+});
+
 app.use("/api/candidate", candidateAuthRoutes);
-app.use("/api/employer", employerAuthRoutes); 
+app.use("/api/employer", employerAuthRoutes);
 
 export default app;
