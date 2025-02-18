@@ -7,8 +7,9 @@ const CandidateSchema = new mongoose.Schema({
     password: { type: String, required: true },
     location: { type: String },
     salary: { type: Number },
+    pdfUrl: { type: String }, 
+    pdfText: { type: String }, 
 });
-
 
 CandidateSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
@@ -17,7 +18,6 @@ CandidateSchema.pre("save", async function (next) {
     next();
 });
 
-// Password comparison 
 CandidateSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };

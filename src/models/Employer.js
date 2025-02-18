@@ -4,10 +4,11 @@ import bcrypt from "bcryptjs";
 const EmployerSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    jobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }] // Stores all jobs posted
 });
 
-//hash password
+// Hash password before saving
 EmployerSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
     const salt = await bcrypt.genSalt(10);
@@ -15,7 +16,7 @@ EmployerSchema.pre("save", async function (next) {
     next();
 });
 
-// Password comparison 
+// Password comparison
 EmployerSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };

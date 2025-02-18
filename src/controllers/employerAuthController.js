@@ -9,6 +9,7 @@ export const registerEmployer = async (req, res) => {
         if (employerExists) return res.status(400).json({ message: "Employer already exists" });
 
         const employer = await Employer.create({ name, email, password });
+        
 
         if (employer) {
             res.status(201).json({
