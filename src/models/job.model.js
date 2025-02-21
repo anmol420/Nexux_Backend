@@ -15,11 +15,9 @@ const jobSchema = new mongoose.Schema({
     },
     jdUrl: { 
         type: String, 
-        required: true,
     },
     jdText: {
-        type: String, 
-        required: true,
+        type: String,
     },
     rank: [
         {

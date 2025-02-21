@@ -29,6 +29,9 @@ const candidateSchema = new mongoose.Schema({
     salary: { 
         type: String,
     },
+    githubUrl: {
+        type: String,
+    },
     pdfUrl: { 
         type: String,
     }, 
