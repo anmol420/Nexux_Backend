@@ -117,6 +117,7 @@ const submitData = async (req, res) => {
         candidate.pdfUrl = url;
         candidate.pdfText = response.data[0].jobs;
         candidate.githubUrl = githubID;
+        candidate.firstTimeLogin = false;
         await candidate.save();
         return res
             .status(200)
